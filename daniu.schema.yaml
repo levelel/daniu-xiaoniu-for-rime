@@ -1,0 +1,179 @@
+# Rime schema: daniu.schema.yaml
+# encoding: utf-8
+
+schema:
+  schema_id: daniu
+  name: 大牛
+  version: "1.0"
+  author:
+    - Your Name
+  description: 基于大牛双拼和小牛形码的双拼加辅码输入方案
+
+dictionary:
+  - name: daniu
+    path: daniu.dict.yaml
+    type: table
+  - name: xingma
+    path: xingma.dict.yaml
+    type: table
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - table_translator
+    - table_translator@xingma
+    - reverse_lookup_translator
+  filters:
+    - simplifier
+    - uniquifier
+    - charset_filter@xingma
+
+menu:
+  page_size: 5
+  hilited_corner_radius: 4
+  border_height: 3
+  border_width: 4
+  margin_x: 12
+  margin_y: 12
+  spacing: 10
+  hilite_spacing: 4
+  round_corner: 4
+
+recognizer:
+  import_preset: default
+  patterns:
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+    xingma: "^[a-z]+[a-z]$"
+    reverse_lookup: "^[a-z]+[[]([a-z])*$"
+    sp: "^[a-z]+(,,)?$"
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+  algebra:
+    - derive/^([zcs])h/$1/
+    - derive/^([jqxy])u/$1v/
+    - derive/^([nl])ue/$1ve/
+    - xform/^(.+)[\[]([\w\-]+)$/$1/
+    - xform/^(.+)[\[]([\w\-]+)$/$2/
+    - xform/^([a-z]+),,$/$1,,$/
+    - derive/^([a-z])[a-z]$/$1_/
+    - derive/^([a-z])[a-z][a-z]$/$1_/
+    - derive/^([a-z])[a-z][a-z][a-z]$/$1_/
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: ["中文", "西文"]
+  - name: full_shape
+    reset: 0
+    states: ["半角", "全角"]
+  - name: simplification
+    reset: 0
+    states: ["漢字", "汉字"]
+  - name: auxiliary
+    reset: 1
+    states: ["关闭辅码", "开启辅码"]
+
+punctuator:
+  import_preset: default
+  full_shape:
+    " ": "　"
+    ",": "，"
+    ".": "。"
+    "?": "？"
+    "!": "！"
+    ":": "："
+    ";": "；"
+    "\"": "”"
+    "'": "’"
+    "(": "（"
+    ")": "）"
+    "[": "【"
+    "]": "】"
+    "<": "《"
+    ">": "》"
+    "~": "～"
+    "`": "·"
+    "@": "＠"
+    "#": "＃"
+    "$": "＄"
+    "%": "％"
+    "&": "＆"
+    "*": "＊"
+    "+": "＋"
+    "-": "－"
+    "=": "＝"
+    "/": "／"
+    "\\": "＼"
+    "|": "｜"
+    "^": "＾"
+
+translator:
+  dictionary: daniu
+  enable_charset_filter: true
+  enable_sentence: true
+  enable_encoder: true
+  encode_commit_history: true
+  max_phrase_length: 4
+  enable_completion: true
+  enable_user_dict: true
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+    - "^c.*$"
+    - "^s.*$"
+
+xingma:
+  dictionary: xingma
+  enable_charset_filter: true
+  enable_sentence: false
+  enable_user_dict: false
+  prefix: ""
+  suffix: ""
+  tips: "〔形码〕"
+  preedit_format:
+    - "xlit|[|〔"
+    - "xlit|]|〕"
+  enable_encoder: true
+  encode_commit_history: true
+  max_phrase_length: 1
+  enable_completion: true
+  comment_format: "〔%s〕"
+  disable_user_dict_for_patterns:
+    - "^[a-z]+[a-z]$"
+
+key_binder:
+  import_preset: default
+  bindings:
+    - {accept: "Control+p", send: Page_Up, when: composing}
+    - {accept: "Control+n", send: Page_Down, when: composing}
+    - {accept: "Control+b", send: Left, when: composing}
+    - {accept: "Control+f", send: Right, when: composing}
+    - {accept: "Control+a", send: Home, when: composing}
+    - {accept: "Control+e", send: End, when: composing}
+    - {accept: "Control+d", send: Delete, when: composing}
+    - {accept: "Control+k", send: "Shift+Delete", when: composing}
+    - {accept: "Control+h", send: BackSpace, when: composing}
+    - {accept: "Control+g", send: Escape, when: composing}
+    - {accept: "Control+bracketleft", send: Escape, when: composing}
+    - {accept: "Alt+v", send: Page_Up, when: composing}
+    - {accept: "Control+v", send: Page_Down, when: composing}
+    - {accept: semicolon, send: 2, when: has_menu}
+    - {accept: apostrophe, send: 3, when: has_menu}

@@ -1,0 +1,23 @@
+patch:
+  "style/horizontal": true
+  "style/font_face": "Microsoft YaHei"
+  "style/font_point": 14
+  "style/inline_preedit": false
+  "style/preedit_type": composition
+  "style/display_tray_icon": true
+  "style/layout/border": 0
+  "style/layout/margin_x": 10
+  "style/layout/margin_y": 10
+  "style/layout/spacing": 10
+  "style/layout/candidate_spacing": 5
+  "style/layout/round_corner": 0
+  "style/color_scheme": metroblue
+  switches:
+    - name: ascii_mode
+      reset: 0
+      states: ["中文", "西文"]
+    - name: full_shape
+      states: ["半角", "全角"]
+    - name: simplification
+      reset: 1
+      states: ["漢字", "汉字"] 

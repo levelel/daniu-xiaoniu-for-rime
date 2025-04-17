@@ -1,0 +1,38 @@
+customization:
+  distribution_code_name: Weasel
+  distribution_version: 0.16.3
+  generator: "Weasel::UIStyleSettings"
+  modified_time: "Wed Mar 26 02:26:33 2025"
+  rime_version: 1.11.2
+patch:
+  "style/color_scheme": metroblue
+  "style/horizontal": true
+  "style/font_face": "Microsoft YaHei"
+  "style/font_point": 14
+  "style/inline_preedit": false
+  "style/display_tray_icon": true
+  "style/display_composition": true
+  "style/display_candidates": true
+  "style/candidate_format": "%c. %@"
+  "style/candidate_list_layout": stacked
+  "style/layout/border_width": 0
+  "style/layout/margin_x": 12
+  "style/layout/margin_y": 12
+  "style/layout/spacing": 10
+  "style/layout/candidate_spacing": 24
+  "style/layout/round_corner": 0
+  "style/layout/hilite_padding": 12
+  "style/layout/hilite_spacing": 8
+  "style/layout/min_width": 160
+  "style/layout/min_height": 0
+  "style/layout/border": 0
+  "style/layout/margin_x": 12
+  "style/layout/margin_y": 12
+  "style/layout/spacing": 10
+  "style/layout/candidate_spacing": 5
+  "style/layout/round_corner": 0
+  "style/horizontal": true
+  "style/inline_preedit": false
+  "style/preedit_type": composition
+  "style/display_tray_icon": true
+  "style/candidate_per_row": 1

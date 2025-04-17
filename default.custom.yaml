@@ -1,0 +1,18 @@
+customization:
+  distribution_code_name: Weasel
+  distribution_version: 0.16.3
+  generator: "Rime::SwitcherSettings"
+  modified_time: "Wed Mar 26 03:09:25 2025"
+  rime_version: 1.11.2
+patch:
+  menu/page_size: 5
+  schema_list:
+    - {schema: daniu}
+  switcher/hotkeys:
+    - "Control+grave"
+    - "Control+Shift+grave"
+  switcher/save_options:
+    - full_shape
+    - ascii_punct
+    - simplification
+    - extended_charset
